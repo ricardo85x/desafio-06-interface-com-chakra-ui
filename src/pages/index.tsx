@@ -1,5 +1,11 @@
+import { Header } from "../components/Header";
+import { Banner } from "../components/Banner"
+
 export default function Home() {
   return (
-    <h1>Ola mundo</h1>
+    <>
+      <Header hasBackButton />
+      <Banner />
+    </>
   )
 }
