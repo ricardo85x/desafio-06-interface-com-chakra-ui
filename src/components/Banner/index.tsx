@@ -22,8 +22,8 @@ export function Banner() {
             align="center"
             mx="auto"
         >
-            <Flex  width="100%" align="center" justify="space-around">
-                <Box mt="6" ml="6" fontFamily="Poppins">
+            <Flex maxWidth={1160} width="100%" align="center" justify="space-between">
+                <Box mt="6" fontFamily="Poppins">
                     <Text color="gray.100" fontSize="36" fontWeight="medium" >5 Continentes,</Text>
                     <Text color="gray.100" fontSize="36" fontWeight="medium" >infinitas possibilidades.</Text>
                     <Text mt="5" color="gray.300">Chegou a hora de tirar do papel a viagem que você sempre sonhou. </Text>

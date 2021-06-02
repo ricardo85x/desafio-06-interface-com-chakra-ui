@@ -20,7 +20,7 @@ export function Header({hasBackButton = false} : HeaderProps) {
             mx="auto"
             justify="center"
         >
-            <Flex maxWidth={1100} width="100%">
+            <Flex maxWidth={1160} width="100%">
                { hasBackButton && <Image src={backImg} /> } 
                 <Flex w="100%" justify="center"> 
                     <Image  src={logo} />
