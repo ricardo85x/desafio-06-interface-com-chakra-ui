@@ -12,7 +12,7 @@ export default function Home() {
       <TravelTypes />
 
       <VStack spacing="20" mt="20" align="center" justify="center">
-          <Divider w="300px" color="black" borderWidth={1}   />
+          <Divider opacity="1" w="300px" borderColor="black" borderWidth={1}   />
           <Flex direction="column" fontSize="36" fontWeight="500" align="center" justify="center"> 
             <Text lineHeight="1">Vamos nessa?</Text>
             <Text>Então escolha seu continente</Text>
