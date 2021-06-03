@@ -9,6 +9,7 @@ interface HeaderProps {
 export function Header({hasBackButton = false} : HeaderProps) {
 
     return (
+    
         <Flex
             as="header"
             maxWidth={1440}
@@ -16,11 +17,11 @@ export function Header({hasBackButton = false} : HeaderProps) {
             h={100}
             bgColor="gray.300"
             align="center"
-            p="6"
+            p="3"
             mx="auto"
             justify="center"
         >
-            <Flex maxWidth={1160} width="100%">
+            <Flex maxWidth={1160} width="100%" justify="space-between">
                { hasBackButton && <Image src={backImg} /> } 
                 <Flex w="100%" justify="center"> 
                     <Image  src={logo} />

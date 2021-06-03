@@ -21,6 +21,8 @@ export function Banner() {
             justify="center"
             align="center"
             mx="auto"
+            p="6"
+
         >
             <Flex maxWidth={1160} width="100%" align="center" justify="space-between">
                 <Box mt="6" fontFamily="Poppins">
