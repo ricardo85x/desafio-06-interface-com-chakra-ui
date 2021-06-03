@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "static": "next build && next export -o build"
+    "static": "next build && next export -o docs"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
