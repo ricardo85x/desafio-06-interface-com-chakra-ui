@@ -3,6 +3,7 @@ import { Banner } from "../components/Banner"
 import { TravelTypes } from "../components/TravelTypes";
 import React from "react";
 import { Flex, Divider, Text, VStack } from "@chakra-ui/react";
+import { SliderContainer } from "../components/SlideContainer";
 
 export default function Home() {
   return (
@@ -18,6 +19,8 @@ export default function Home() {
             <Text>Então escolha seu continente</Text>
           </Flex>
       </VStack>
+
+      <SliderContainer />
 
 
 

@@ -1,12 +1,9 @@
 const withImages = require('next-images')
-const withPlugins = require('next-compose-plugins');
+const withSass = require('sass')
 
-// module.exports = withImages()
+const withPlugins = require('next-compose-plugins');
 
 module.exports = withPlugins([
     withImages,
-    {
-        trailingSlash: true,
-    }
-
+    withSass
 ])
