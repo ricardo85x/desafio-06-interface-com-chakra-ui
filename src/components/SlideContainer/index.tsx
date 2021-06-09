@@ -1,4 +1,4 @@
-import { Flex, Image } from '@chakra-ui/react'
+import { Flex, Text, VStack } from '@chakra-ui/react'
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -14,13 +14,33 @@ export function SliderContainer() {
             align="center"
             justify="center"
             mx="auto"
-            mt="13"
+            mt="10"
+            mb="10"
 
         >
+
+
             <Swiper navigation pagination className="mySwiper">
                 {Array.from({ length: 5 }).map((_, i) => (
                     <SwiperSlide key={`slide-${i}`}>
-                        <Image src={`https://picsum.photos/id/${i + 1}/1240/450`} alt={`Slide ${i}`} />
+                        <Flex 
+
+                            w="100%"
+                            maxWidth={1240}
+                            h={[250, 350, 450]}
+                            backgroundPosition="center"
+                            backgroundRepeat="no-repeat"
+                            backgroundSize="cover"
+                            justify="center"
+                            align="center"
+                            backgroundImage={`https://picsum.photos/id/${i + 1}/1240/450`}
+                        >
+                           <VStack textShadow="1px 1px 1px #000000" color="gray.100" spacing={["3","4"]} fontWeight="700" fontFamily="Poppins">
+                            <Text fontSize={["24","48"]}>Europa</Text>
+                            <Text fontSize={["14","24"]}>O continente mais antigo</Text>
+                           </VStack>
+
+                        </Flex>
                     </SwiperSlide>
 
                 ))}

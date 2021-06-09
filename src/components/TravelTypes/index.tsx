@@ -22,6 +22,7 @@ export function TravelTypes() {
             fontSize="24"
             flexWrap="wrap"
             p="6"
+            color="#47585B"
         >
          
             <TravelItem text="vida noturna" image={cocktailImg} />

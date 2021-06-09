@@ -15,7 +15,6 @@ export function Header({hasBackButton = false} : HeaderProps) {
             maxWidth={1440}
             w="100%"
             h={100}
-            bgColor="gray.300"
             align="center"
             p="3"
             mx="auto"
