@@ -6,10 +6,13 @@ const isDev = process.env.NODE_ENV !== "production";
 
 
 module.exports = withPlugins([
-    withImages,
+    [withImages, {
+        assetPrefix: isDev ? "": "/desafio-06-interface-com-chakra-ui/"
+    }],
     withSass,
     {
         trailingSlash: true,
         basePath: isDev ? "": "/desafio-06-interface-com-chakra-ui",
-        assetPrefix: isDev ? "": "/desafio-06-interface-com-chakra-ui/"    }
+        assetPrefix: isDev ? "": "/desafio-06-interface-com-chakra-ui/"    
+    }
 ])
