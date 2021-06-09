@@ -1,18 +1,19 @@
+const isDev = process.env.NODE_ENV !== "production";
 const withImages = require('next-images')
 const withSass = require('sass')
 
 const withPlugins = require('next-compose-plugins');
-const isDev = process.env.NODE_ENV !== "production";
 
+const repository_name = "desafio-06-interface-com-chakra-ui"
 
 module.exports = withPlugins([
     [withImages, {
-        assetPrefix: isDev ? "": "/desafio-06-interface-com-chakra-ui/"
+        assetPrefix: isDev ? "": `/${repository_name}/`
     }],
     withSass,
     {
         trailingSlash: true,
-        basePath: isDev ? "": "/desafio-06-interface-com-chakra-ui",
-        assetPrefix: isDev ? "": "/desafio-06-interface-com-chakra-ui/"    
+        basePath: isDev ? "": `/${repository_name}`,
+        assetPrefix: isDev ? "": `/${repository_name}/`   
     }
 ])
