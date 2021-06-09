@@ -15,16 +15,16 @@ jobs:
     steps:
       - name: Get files
         uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install packages
-        uses: borales/actions-yarn@v2.0.0
-      - name: Build
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build
-      - name: Export to out dir
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: export
+        run: yarn
+      - name: Install packages
+        run: yarn build
+      - name: Install packages
+        run: yarn export
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
       - name: Deploy
