@@ -21,7 +21,7 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install packages
         run: yarn
-      - name: Install packages
+      - name: Install build
         run: yarn build
       - name: Install packages
         run: yarn export
