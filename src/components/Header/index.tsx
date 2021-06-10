@@ -1,5 +1,5 @@
-import { Flex, Image } from "@chakra-ui/react";
-import Link from 'next/link'
+import { Flex, Image, Link } from "@chakra-ui/react";
+import { default as NextLink}  from 'next/link'
 import logo from "./logo.svg";
 import backImg from "./back.svg";
 
@@ -22,7 +22,7 @@ export function Header({hasBackButton = false} : HeaderProps) {
             justify="center"
         >
             <Flex maxWidth={1160} width="100%" justify="space-between">
-               { hasBackButton && (<Link href="/"><Image src={backImg} /></Link>) } 
+               { hasBackButton && (<NextLink href="/"><Link><Image src={backImg} /></Link></NextLink>) } 
                 <Flex w="100%" justify="center"> 
                     <Image  src={logo} />
                 </Flex>

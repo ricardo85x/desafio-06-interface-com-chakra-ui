@@ -1,5 +1,5 @@
-import { Flex, Text, VStack } from '@chakra-ui/react'
-import Link from 'next/link'
+import { Flex, Text, VStack, Link } from '@chakra-ui/react'
+import { default as NextLink}  from 'next/link'
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -38,10 +38,13 @@ export function SliderContainer() {
                         >
 
                             <VStack textShadow="1px 1px 1px #000000" color="gray.100" spacing={["3", "4"]} fontWeight="700" fontFamily="Poppins">
-                                <Link href="continent">
-                                    <Text fontSize={["24", "48"]}>Europa</Text>
-                                    <Text fontSize={["14", "24"]}>O continente mais antigo</Text>
-                                </Link>
+                                <NextLink href="/continent">
+                                    <Link>
+                                        <Text fontSize={["24", "48"]}>Europa</Text>
+                                        <Text fontSize={["14", "24"]}>O continente mais antigo</Text>
+                                    </Link>
+                                </NextLink>
+                                
 
                             </VStack>
 
