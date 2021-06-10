@@ -1,4 +1,5 @@
-import { Flex, Image, Link } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
+import Link from 'next/link'
 import logo from "./logo.svg";
 import backImg from "./back.svg";
 
