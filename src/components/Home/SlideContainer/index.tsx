@@ -1,4 +1,4 @@
-import { Flex, Text, VStack } from '@chakra-ui/react'
+import { Flex, Text, VStack, Link } from '@chakra-ui/react'
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -23,7 +23,7 @@ export function SliderContainer() {
             <Swiper navigation pagination className="mySwiper">
                 {Array.from({ length: 5 }).map((_, i) => (
                     <SwiperSlide key={`slide-${i}`}>
-                        <Flex 
+                        <Flex
 
                             w="100%"
                             maxWidth={1240}
@@ -35,10 +35,14 @@ export function SliderContainer() {
                             align="center"
                             backgroundImage={`https://picsum.photos/id/${i + 1}/1240/450`}
                         >
-                           <VStack textShadow="1px 1px 1px #000000" color="gray.100" spacing={["3","4"]} fontWeight="700" fontFamily="Poppins">
-                            <Text fontSize={["24","48"]}>Europa</Text>
-                            <Text fontSize={["14","24"]}>O continente mais antigo</Text>
-                           </VStack>
+
+                            <VStack textShadow="1px 1px 1px #000000" color="gray.100" spacing={["3", "4"]} fontWeight="700" fontFamily="Poppins">
+                                <Link href="/continent">
+                                    <Text fontSize={["24", "48"]}>Europa</Text>
+                                    <Text fontSize={["14", "24"]}>O continente mais antigo</Text>
+                                </Link>
+
+                            </VStack>
 
                         </Flex>
                     </SwiperSlide>

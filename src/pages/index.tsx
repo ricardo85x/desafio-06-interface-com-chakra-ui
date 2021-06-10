@@ -1,14 +1,14 @@
 import { Header } from "../components/Header";
-import { Banner } from "../components/Banner"
-import { TravelTypes } from "../components/TravelTypes";
+import { Banner } from "../components/Home/Banner"
+import { TravelTypes } from "../components/Home/TravelTypes";
 import React from "react";
 import { Flex, Divider, Text, VStack } from "@chakra-ui/react";
-import { SliderContainer } from "../components/SlideContainer";
+import { SliderContainer } from "../components/Home/SlideContainer";
 
 export default function Home() {
   return (
     <>
-      <Header hasBackButton />
+      <Header />
       <Banner />
       <TravelTypes />
 
