@@ -37,7 +37,7 @@ export function SliderContainer() {
                             backgroundImage={`https://picsum.photos/id/${i + 1}/1240/450`}
                         >
 
-                            <VStack textShadow="1px 1px 1px #000000" color="gray.100" spacing={["3", "4"]} fontWeight="700" fontFamily="Poppins">
+                            <VStack textShadow="1px 1px 1px #000000" color="gray.100" spacing={["3", "4"]} fontWeight="700" >
                                 <NextLink href="/continent">
                                     <Link>
                                         <Text fontSize={["24", "48"]}>Europa</Text>

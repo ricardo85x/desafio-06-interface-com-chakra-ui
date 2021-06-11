@@ -1,6 +1,4 @@
-import { Box, Flex, Image, Text, useBreakpointValue } from "@chakra-ui/react"
-import background from "./background.png"
-import airplane from "./airplane.svg"
+import { Box, Flex, Text, useBreakpointValue } from "@chakra-ui/react"
 
 export function Banner() {
 
@@ -23,12 +21,10 @@ export function Banner() {
             mx="auto"
             direction="column"
             p="3"
-
-
         >
 
            <Box  m="3.75rem" maxWidth={1160} width="100%">
-                <Text color="gray.100" fontSize="48" fontWeight="600" fontFamily="Poppins">Europa</Text>
+                <Text color="gray.100" fontSize="48" fontWeight="600">Europa</Text>
            </Box>
 
         </Flex>
