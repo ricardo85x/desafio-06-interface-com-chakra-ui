@@ -6,13 +6,9 @@ import {createApi} from 'unsplash-js';
 
 export default async function searchPhotos(req: NextApiRequest, res: NextApiResponse) {
 
-  const demoKey = "hb5ns-isEdcpcelwGfdy8ii0b3pK6seFC12WwZnarqw"
-
   const { query: { continent } } = req
   const unsplash = createApi({
-    accessKey: process.env.UNSPLASH_ACCESS_KEY ? 
-      process.env.UNSPLASH_ACCESS_KEY : 
-      demoKey
+    accessKey: process.env.UNSPLASH_ACCESS_KEY 
   });
 
   try {

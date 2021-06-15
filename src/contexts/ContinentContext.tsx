@@ -26,12 +26,10 @@ const ContinentContext = createContext({
 export function ContextProvider({ children }: ContextProviderProps) {
 
     const loadContinent = async (): Promise<ContinentProps[]> => {
-        console.log("D1 010101")
         try {
 
 
             const continentsRequest = await api.get<ContinentsProps>("continents")
-            console.log("Le continente", continentsRequest)
 
             const { data } = continentsRequest
 
@@ -44,8 +42,6 @@ export function ContextProvider({ children }: ContextProviderProps) {
                     image: image.data.url
                 }
 
-                console.log("newContinent", newContinent)
-
 
                 return newContinent
 
@@ -54,11 +50,11 @@ export function ContextProvider({ children }: ContextProviderProps) {
             return tempContinets
 
         } catch (err) {
-            console.log("deu ruim AI", err)
+            console.log("err 1", err)
         }
         let responsex: ContinentProps[] = []
 
-        console.log("WTF??")
+       
         return responsex
     }
 
@@ -68,7 +64,6 @@ export function ContextProvider({ children }: ContextProviderProps) {
     const handleUpdateContext = useCallback(async () => {
         setLoading(true);
 
-        console.log("handleUpdateContext 1")
         const continents = await loadContinent()
         setValue(continents)
         setLoading(false);
