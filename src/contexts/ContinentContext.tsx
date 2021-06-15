@@ -38,7 +38,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
 
             const { data } = continentsRequest
 
-            let tempContinets = await Promise.all(data.continents.map(async (continent): Promise<ContinentProps> => {
+            let tempContinets = await Promise.all(data.continents.filter(c => c.id < 3).map(async (continent): Promise<ContinentProps> => {
                 
                 console.log("D113", continent)
 

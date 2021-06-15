@@ -1,14 +1,37 @@
-[
-    {
-        "id": 1,
-        "name": "América do Norte",
-        "description": "O continente ...",
-        "image":""
-    },
-    {
-        "id": 2,
-        "name": "América do Sul",
-        "description": "O continente ...",
-        "image":""
-    }
+[{
+    "id": 1,
+    "name": "América do Norte",
+    "description": "O continente ...",
+    "image":""
+},
+{
+    "id": 2,
+    "name": "América do Sul",
+    "description": "O continente ...",
+    "image":""
+},
+{
+    "id": 3,
+    "name": "Ásia",
+    "description": "O continente ...",
+    "image":""
+},
+{
+    "id": 4,
+    "name": "África",
+    "description": "O continente ...",
+    "image":""
+},
+{
+    "id": 5,
+    "name": "Europa",
+    "description": "O continente ...",
+    "image":""
+},
+{
+    "id": 6,
+    "name": "Oceania",
+    "description": "O continente ...",
+    "image":""
+}
 ]
