@@ -1,15 +1,19 @@
-import { Flex, Text, VStack, Link } from '@chakra-ui/react'
+import { Flex, Text, VStack, Link, textDecoration } from '@chakra-ui/react'
 import { default as NextLink}  from 'next/link'
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { ContinentProps } from "../../../pages/continent/[id]"
 
 SwiperCore.use([Navigation, Pagination]);
 
-export function SliderContainer() {
+interface SliderContainerProps {
+    continents: ContinentProps[]
+}
+
+export function SliderContainer( { continents } : SliderContainerProps ) {
 
     return (
         <Flex
-
             width="100%"
             maxWidth={1240}
             align="center"
@@ -21,9 +25,9 @@ export function SliderContainer() {
         >
 
 
-            <Swiper navigation pagination className="mySwiper">
-                {Array.from({ length: 5 }).map((_, i) => (
-                    <SwiperSlide key={`slide-${i}`}>
+            <Swiper navigation pagination loop className="mySwiper">
+                {continents.map(continent => (
+                    <SwiperSlide key={`slide-${continent.id}`}>
                         <Flex
 
                             w="100%"
@@ -34,18 +38,25 @@ export function SliderContainer() {
                             backgroundSize="cover"
                             justify="center"
                             align="center"
-                            backgroundImage={`https://picsum.photos/id/${i + 1}/1240/450`}
+                            backgroundImage={continent.image}
                         >
 
                             <VStack textShadow="1px 1px 1px #000000" color="gray.100" spacing={["3", "4"]} fontWeight="700" >
-                                <NextLink href="/continent">
-                                    <Link>
-                                        <Text fontSize={["24", "48"]}>Europa</Text>
-                                        <Text fontSize={["14", "24"]}>O continente mais antigo</Text>
+                                <NextLink href={`/continent/${continent.id}`}>
+                                    <Link 
+                                        borderRadius={10} 
+                                        p={5}  
+                                        backgroundColor="rgb(50,50,50,0.4)"  
+                                        _hover={{
+                                            textDecoration: "none",
+                                            backgroundColor: "rgb(50,50,50,0.6)"
+                                        }}
+                                    >
+                                        <Text fontSize={["24", "48"]}>{continent.name}</Text>
+                                        <Text fontSize={["14", "24"]}>{continent.description}</Text>
                                     </Link>
-                                </NextLink>
+                                    </NextLink>
                                 
-
                             </VStack>
 
                         </Flex>

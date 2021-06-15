@@ -1,18 +1,26 @@
 import { Box, Flex, Text, useBreakpointValue } from "@chakra-ui/react"
+import { ContinentProps } from "../../../pages/continent/[id]";
 
-export function Banner() {
+interface BannerProps {
+    continent: ContinentProps
+}
+
+export function Banner({ continent }: BannerProps) {
+
 
     const isWideVersion = useBreakpointValue({
         sm: false,
         md: true
     });
 
+
+
     return (
         <Flex
             w="100%"
             maxWidth={1440}
             h={500}
-            backgroundImage={`https://picsum.photos/id/2/1240/450`}
+            backgroundImage={continent.image}
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
@@ -20,12 +28,23 @@ export function Banner() {
             align="center"
             mx="auto"
             direction="column"
-            p="3"
+            
         >
+            <Flex 
+                p={5} align="center" justify="center" backgroundColor="rgb(50,50,50,0.4)" width="100%">
+                <Box p="3" maxWidth={1160} width="100%">
 
-           <Box  m="3.75rem" maxWidth={1160} width="100%">
-                <Text color="gray.100" fontSize="48" fontWeight="600">Europa</Text>
-           </Box>
+                    <Text
+                       
+                        color="gray.100"
+                        fontSize="48"
+                        fontWeight="600"
+                    >{continent.name}</Text>
+
+
+                </Box>
+            </Flex>
+
 
         </Flex>
     )

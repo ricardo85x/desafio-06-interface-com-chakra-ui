@@ -1,6 +1,8 @@
 import { Box, Flex, Image, Text, useBreakpointValue } from "@chakra-ui/react"
 import background from "./background.png"
 import airplane from "./airplane.svg"
+import { ContinentProps } from "../../../pages/continent/[id]"
+
 
 export function Banner() {
 
