@@ -36,6 +36,8 @@ export default function Continent() {
 
     const readContinent = async () => {
       if (continents.length == 0 && loading == false){
+
+        
         const response = await updateContext()
         console.log("continents", continents)
         console.log("loading", loading)

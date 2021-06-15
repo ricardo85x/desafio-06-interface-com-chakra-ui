@@ -28,19 +28,29 @@ export function ContextProvider({ children }: ContextProviderProps) {
     const loadContinent = async (): Promise<ContinentProps[]> => {
         try {
 
+            console.log("D111")
 
             const continentsRequest = await api.get<ContinentsProps>("continents")
+
+
+            console.log("D111 2")
+
 
             const { data } = continentsRequest
 
             let tempContinets = await Promise.all(data.continents.map(async (continent): Promise<ContinentProps> => {
                 
+                console.log("D113", continent)
+
+
                 const image = await api.get<ImageProps>("/unsplash", { params: { continent: continent.name } })
                 const newContinent = {
                     ...continent,
                     description: image.data.description,
                     image: image.data.url
                 }
+
+                console.log("DDD4", newContinent)
 
 
                 return newContinent
