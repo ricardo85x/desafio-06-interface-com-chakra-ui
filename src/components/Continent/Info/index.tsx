@@ -2,18 +2,33 @@ import { HStack, Flex, Text, Image, Tooltip } from '@chakra-ui/react'
 
 import infoIco from "./info.svg";
 
-interface infoProps {
-    value: number;
-    text: string;
-    icon?: string;
+import { ContinentProps } from "../../../pages/continent/[id]";
+
+interface InfoProps {
+    continent: ContinentProps
 }
 
-export function Info() {
+interface infoHelperProps {
+    value: string;
+    text: string;
+    icon?: {
+        image: string;
+        label: string;
+    }
+}
 
-    const data: infoProps[] = [
-        { value: 50, text: "países" },
-        { value: 60, text: "línguas" },
-        { value: 27, text: "cidades + 100", icon: infoIco },
+export function Info({ continent }: InfoProps) {
+
+    const data: infoHelperProps[] = [
+        { value: continent.info.countries, text: "países" },
+        { value: continent.info.languages, text: "línguas" },
+        { 
+            value: continent.info.cities.amount, 
+            text: "cidades + 100", 
+            icon: {
+                image: infoIco,
+                label: continent.info.cities.info
+        } },
     ]
 
     return (
@@ -22,12 +37,16 @@ export function Info() {
             {data.map((d, index) => (
                 <Flex direction="column" align="center" key={index} fontWeight="600" >
                     <Text fontSize="48" color="#FFBA08">{d.value}</Text>
-                    <Text fontSize="24" >{d.text} {!!d.icon && (
-                        <Tooltip label="Vilas" fontSize="md">
-                            <Image display="inline" src={d.icon} />
-                        </Tooltip>
+                    <Flex align="center" justify="center">
+                        <Text fontSize="24" pr="2px" >{d.text} </Text>
+                        {!!d.icon && (
+                            <Tooltip label={d.icon!.label} fontSize="md">
+                                <Image  display="inline" src={d.icon.image} />
+                            </Tooltip>
                         )} 
-                    </Text>
+                
+                    </Flex>
+                    
                 </Flex>
             ))}
 

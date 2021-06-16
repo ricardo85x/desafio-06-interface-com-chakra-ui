@@ -1,20 +1,18 @@
 import { Header } from "../components/Header";
 import { Banner } from "../components/Home/Banner"
 import { TravelTypes } from "../components/Home/TravelTypes";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Flex, Divider, Text, VStack } from "@chakra-ui/react";
 import { SliderContainer } from "../components/Home/SlideContainer";
 
-import { createServer } from "miragejs"
-import { api } from "../services/api"
-import continentsMock from "../continents.json"
-import { ContinentProps, ContinentsProps } from "./continent/[id]"
 import { useContinent } from "../contexts/ContinentContext";
 
 interface ImageProps {
   url: string;
   description: string;
 }
+
+
 
 
 
