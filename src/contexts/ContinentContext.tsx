@@ -36,6 +36,9 @@ export function ContextProvider({ children }: ContextProviderProps) {
             // console.log("D111 2")
 
 
+            console.log("continent debug", continentsRequest)
+
+
             const { data } = continentsRequest
 
             let tempContinets = await Promise.all(data.continents.map(async (continent): Promise<ContinentProps> => {
@@ -43,16 +46,21 @@ export function ContextProvider({ children }: ContextProviderProps) {
                 const image = await api.get<ImageProps>("/unsplash", { params: { continent: continent.name } })
                 const newContinent = {
                     ...continent,
-                    
+
                 //    description: image.data.description === "" ? continent.description : image.data.description,
-                   // image: image.data.url.indexOf("unsplash") === -1 ? continent.image : image.data.url 
+                    image: image.data.url.indexOf("unsplash") === -1 ? continent.image : image.data.url 
                 }
+
+                console.log(`image ${continent.name}`, image)
+
 
                 // await Promise.resolve( resolve => setTimeout(resolve, 1000))
 
                 return newContinent
 
             }))
+
+            console.log("FIM DEB", tempContinets)
 
             return tempContinets
 
