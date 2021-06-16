@@ -44,7 +44,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
                 const newContinent = {
                     ...continent,
                 //    description: image.data.description === "" ? continent.description : image.data.description,
-                    image: image.data.url === "" ? continent.image : image.data.url 
+                    image: image.data.url.indexOf("unsplash") === -1 ? continent.image : image.data.url 
                 }
 
                 // await Promise.resolve( resolve => setTimeout(resolve, 1000))
