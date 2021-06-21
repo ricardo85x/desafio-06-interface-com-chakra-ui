@@ -46,7 +46,7 @@
     {
         "id": 4,
         "name": "África",
-        "description": "é o terceiro maior continente em extensão territorial",
+        "description": "É o terceiro maior continente em extensão territorial",
         "image": "/static/images/continents/africa.jpeg",
         "info": {
             "countries": "54",

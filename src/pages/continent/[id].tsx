@@ -6,6 +6,7 @@ import { Info } from "../../components/Continent/Info";
 import { Bio } from "../../components/Continent/Bio"
 import { useContinent } from "../../contexts/ContinentContext";
 import { useRouter } from 'next/router'
+import { City100 } from "../../components/Continent/City100";
 
 
 export interface ContinentsProps {
@@ -80,6 +81,9 @@ export default function Continent() {
             <Bio continent={continent} />
             <Info continent={continent} />
           </HStack>
+
+          <City100 />
+
         </>
       ) : (
         <HStack spacing="2"
