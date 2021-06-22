@@ -12,14 +12,7 @@ interface ImageProps {
   description: string;
 }
 
-
-
-
-
-
 export default function Home() {
-
-  // let [continents, setContinents] = useState([])
 
   const {continents, loading, updateContext } = useContinent()
 

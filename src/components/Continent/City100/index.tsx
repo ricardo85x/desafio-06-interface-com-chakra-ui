@@ -1,10 +1,14 @@
 import { Box, Flex, Stack, Heading } from "@chakra-ui/react"
+import { ContinentProps } from "../../../pages/continent/[id]"
 import { City } from "./City"
-export function City100() {
 
+interface City100Props {
+    continent: ContinentProps
+}
 
-    const cities = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+export function City100({ continent }: City100Props) {
 
+    
     return (
 
         <Box
@@ -24,7 +28,7 @@ export function City100() {
                 justify="space-between"
             >
 
-                {cities.map(city => <City key={city} />)}
+                {continent.info.city100.map(city => <City city={city} key={city.rank} />)}
 
             </Flex>
 

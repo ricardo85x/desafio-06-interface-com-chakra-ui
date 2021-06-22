@@ -1,6 +1,12 @@
-import { Flex, Box, Text, Image } from "@chakra-ui/react"
+import { Flex, Box, Text, Image, Tooltip } from "@chakra-ui/react"
+import { RankProps } from "../../../pages/continent/[id]"
 
-export function City() {
+
+interface CityProps {
+    city: RankProps
+}
+
+export function City({ city } : CityProps) {
 
     return (
         <Box
@@ -21,8 +27,8 @@ export function City() {
             >
 
                 <Box textAlign="left" justify="center">
-                    <Text>Cidade</Text>
-                    <Text>País</Text>
+                    <Text>{city.city}</Text>
+                    <Tooltip label={`#${city.rank}`} ><Text>{city.country}</Text></Tooltip>
                 </Box>
 
                 <Box>Ico</Box>

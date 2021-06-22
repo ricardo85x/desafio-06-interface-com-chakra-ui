@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import { api } from "../services/api"
-import { ContinentProps, ContinentsProps } from "../pages/continent/[id]"
+import { ContinentProps, ContinentsProps,RankDataProps } from "../pages/continent/[id]"
 
 interface ImageProps {
     url: string;
@@ -28,39 +28,31 @@ export function ContextProvider({ children }: ContextProviderProps) {
     const loadContinent = async (): Promise<ContinentProps[]> => {
         try {
 
-            // console.log("D111")
-
             const continentsRequest = await api.get<ContinentsProps>("continents")
-
-
-            // console.log("D111 2")
-
+            
+            const rankRequest = await api.get<RankDataProps>("rank")
 
             console.log("continent debug", continentsRequest)
 
 
             const { data } = continentsRequest
+            const { data: { rank }} = rankRequest
+
 
             let tempContinets = await Promise.all(data.continents.map(async (continent): Promise<ContinentProps> => {
                 
                 const image = await api.get<ImageProps>("/unsplash", { params: { continent: continent.name } })
                 const newContinent = {
                     ...continent,
-
-                //    description: image.data.description === "" ? continent.description : image.data.description,
-                    image: image.data.url.indexOf("unsplash") === -1 ? continent.image : image.data.url 
+                    // description: image.data.description === "" ? continent.description : image.data.description,
+                    image: image.data.url.indexOf("unsplash") === -1 ? continent.image : image.data.url
                 }
 
-                console.log(`image ${continent.name}`, image)
-
-
-                // await Promise.resolve( resolve => setTimeout(resolve, 1000))
+                newContinent.info.city100 = rank.rank.filter(r => r.continent == continent.name)
 
                 return newContinent
 
             }))
-
-            console.log("FIM DEB", tempContinets)
 
             return tempContinets
 

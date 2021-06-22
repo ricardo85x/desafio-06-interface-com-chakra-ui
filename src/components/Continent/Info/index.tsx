@@ -19,15 +19,18 @@ interface infoHelperProps {
 
 export function Info({ continent }: InfoProps) {
 
+
+    console.log(continent.info)
+
     const data: infoHelperProps[] = [
         { value: continent.info.countries, text: "países" },
         { value: continent.info.languages, text: "línguas" },
         { 
-            value: continent.info.cities.amount, 
+            value: continent.info.city100.length.toString(), 
             text: "cidades + 100", 
             icon: {
                 image: infoIco,
-                label: continent.info.cities.info
+                label: "Rank das 100 mais visitadas no mundo"
         } },
     ]
 

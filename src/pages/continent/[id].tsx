@@ -12,6 +12,17 @@ import { City100 } from "../../components/Continent/City100";
 export interface ContinentsProps {
   continents: ContinentProps[]
 }
+
+export interface RankProps {
+  rank: string;
+  city: string;
+  country: string;
+  continent: string
+}
+export interface RankDataProps {
+  rank: { rank: RankProps[] }
+}
+
 export interface ContinentProps {
   id: number;
   name: string;
@@ -20,12 +31,10 @@ export interface ContinentProps {
   info: {
     countries: string;
     languages: string;
-    cities: {
-      amount: string;
-      info: string;
-    }
+    city100: RankProps[]
   }
-  bio: string
+  bio: string;
+  
 }
 
 export default function Continent() {
@@ -82,7 +91,7 @@ export default function Continent() {
             <Info continent={continent} />
           </HStack>
 
-          <City100 />
+          <City100 continent={continent} />
 
         </>
       ) : (
