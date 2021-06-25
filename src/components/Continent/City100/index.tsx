@@ -25,7 +25,7 @@ export function City100({ continent }: City100Props) {
                 width="100%"
                 flexWrap="wrap"
                 align="center"
-                justify="space-between"
+                // justify="space-between"
             >
 
                 {continent.info.city100.map(city => <City city={city} key={city.rank} />)}

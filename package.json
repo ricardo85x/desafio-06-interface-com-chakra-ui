@@ -17,6 +17,7 @@
     "@types/swiper": "^5.4.2",
     "@types/unsplash-js": "^7.0.0",
     "axios": "^0.21.1",
+    "faunadb": "^4.3.0",
     "framer-motion": "^4.1.17",
     "next": "10.2.3",
     "node-fetch": "^2.6.1",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^15.6.1",
     "@types/react": "^17.0.8",
+    "@types/request": "^2.48.5",
     "miragejs": "^0.1.41",
     "next-compose-plugins": "^2.2.1",
     "next-images": "^1.7.0",

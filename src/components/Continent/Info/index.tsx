@@ -30,7 +30,7 @@ export function Info({ continent }: InfoProps) {
             text: "cidades + 100", 
             icon: {
                 image: infoIco,
-                label: "Rank das 100 mais visitadas no mundo"
+                label: "Quantidade de cidades no top 100 das mais visitadas do mundo."
         } },
     ]
 

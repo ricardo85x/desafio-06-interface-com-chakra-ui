@@ -16,20 +16,14 @@ export default function Home() {
 
   const {continents, loading, updateContext } = useContinent()
 
-  
   useEffect(() => {
     const readContinent = async () => {
       if (continents.length == 0 && loading == false){
-        const response = await updateContext()
-        console.log("continents", continents)
-        console.log("loading", loading)
-        console.log("continents", response)
+        await updateContext()
       }
     }
     readContinent()
   })
-  
-
   
   return (
     <>

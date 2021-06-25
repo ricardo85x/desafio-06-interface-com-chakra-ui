@@ -2,7 +2,7 @@ import { createContext, ReactNode, useCallback, useContext, useEffect, useState 
 import { api } from "../services/api"
 import { ContinentProps, ContinentsProps,RankDataProps } from "../pages/continent/[id]"
 
-interface ImageProps {
+export interface ImageProps {
     url: string;
     description: string;
 }
@@ -32,19 +32,14 @@ export function ContextProvider({ children }: ContextProviderProps) {
             
             const rankRequest = await api.get<RankDataProps>("rank")
 
-            console.log("continent debug", continentsRequest)
-
-
             const { data } = continentsRequest
             const { data: { rank }} = rankRequest
 
-
             let tempContinets = await Promise.all(data.continents.map(async (continent): Promise<ContinentProps> => {
                 
-                const image = await api.get<ImageProps>("/unsplash", { params: { continent: continent.name } })
+                const image = await api.get<ImageProps>("/unsplash", { params: { name: continent.name, type: "continent"} })
                 const newContinent = {
                     ...continent,
-                    // description: image.data.description === "" ? continent.description : image.data.description,
                     image: image.data.url.indexOf("unsplash") === -1 ? continent.image : image.data.url
                 }
 
@@ -90,7 +85,6 @@ export function ContextProvider({ children }: ContextProviderProps) {
         </ContinentContext.Provider>
     )
 }
-
 
 
 export const useContinent = () => useContext(ContinentContext)

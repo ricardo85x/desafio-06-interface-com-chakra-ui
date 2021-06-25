@@ -1,50 +1,171 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-
-import {createApi} from 'unsplash-js';
+import { createApi } from 'unsplash-js';
 import { Basic } from "unsplash-js/src/methods/photos/types"
 
+import { query as q } from 'faunadb'
 
+import { fauna } from '../../services/fauna';
+interface UnsplashImage {
+  id: string;
+  url: {
+    regular: string;
+    thumb: string;
+  },
+  name: string;
+  description: string
+  online: 0|1,
+  user: {
+    id: string,
+    name: string
+  }
+}
 
+const findPhotoDb = async ( name: string, type: string) => {
+
+  try {
+    const  image = await fauna.query(
+      q.Get(
+        q.Intersection([
+          q.Match(q.Index(`${type}_by_name`), name),
+          q.Match(q.Index(`${type}_is_online`), 1)
+        ])
+      )
+    )
+
+    return image;
+
+  } catch (err) {
+    // IMAGE not FOUND
+    return false;
+
+  }
+
+}
+
+const createUpdatePhotoDb = async (object: UnsplashImage, type: string) => {
+
+  try {
+
+    await fauna.query(
+      q.If(
+        q.Not(
+          q.Exists(
+            q.Match(
+              q.Index(`${type}_by_name`),
+              object.name
+            )
+          )
+        ),
+        q.Create(
+          q.Collection(type),
+          { data: object }
+        ), 
+        q.Update(
+          q.Select(
+            "ref",
+            q.Get(
+              q.Match(q.Index(`${type}_by_name`), object.name)
+            ) 
+          ),{
+            data: object
+          }
+        )
+      )
+    )
+
+  } catch (err) {
+    console.log("Opa Opa", err)
+  }
+  
+
+}
+interface SearchPhotosProps {
+  
+  name: string;
+  type: string;
+  width?: number;
+  height?: number;
+  
+}
 
 export default async function searchPhotos(req: NextApiRequest, res: NextApiResponse) {
 
-  const { query: { continent } } = req
+  const { name, type, width = 1240, height = 450 } = req.query as any as SearchPhotosProps;
+
   const unsplash = createApi({
-    accessKey: process.env.UNSPLASH_ACCESS_KEY 
+    accessKey: process.env.UNSPLASH_ACCESS_KEY
   });
 
-  
+  const failbackImageUrl = `https://via.placeholder.com/${width}/${height}/68D391/000000/?text=${name}`
 
-  const emptyResponse = { url: "", description: ""}
+  const emptyResponse = { url: failbackImageUrl }
 
   try {
-    const photos = await unsplash.photos.getRandom({ query: continent as string,  orientation: "landscape"})
 
-    const { response } = photos
+    const imageDB = await findPhotoDb(name, type);
 
+    if (!imageDB) {
+
+      console.log("La vamos nos")
+      
+      const fakeImage = {
+        id:"",
+        name,
+        description: "generic",
+        online: 0,
+        user: {
+          id: "",
+          name: ""
+        },
+        url: {
+          regular: failbackImageUrl,
+          thumb: `https://via.placeholder.com/300/300/68D391/000000/?text=${name}`
+        }
+      } as UnsplashImage
+
+      const photos = await unsplash.photos.getRandom({ query: name as string, orientation: "landscape" })
+
+      const { response } = photos
   
+      if (response) {
 
-    if ( response ) {
+        const photo = response as Basic
 
-      // console.log("unsplash x-ratelimit-limit", originalResponse.headers.get("x-ratelimit-limit"))
-      // console.log("unsplash x-ratelimit-remaining", originalResponse.headers.get("x-ratelimit-remaining"))
+        await createUpdatePhotoDb({
+          id:photo.id,
+          name,
+          description: photo.description,
+          online: 1,
+          user: {
+            id: photo.user.id,
+            name: photo.user.name
+          },
+          url: {
+            regular: photo.urls.regular,
+            thumb: photo.urls.thumb
+          }
+        }, type)
 
-      const photo = response as Basic
-
-      const { alt_description } = photo
-
-      if (alt_description){
         return res.json({
-          url: photo.urls.regular,
-          description: alt_description
+          url: photo.urls.regular
         })
+
+      } else {
+        await createUpdatePhotoDb(fakeImage, type)
       }
-     
+
+    } else {
+
+      return res.json({
+        url: (imageDB as { data: UnsplashImage }).data.url.regular
+      })
     }
+
     return res.json(emptyResponse)
-    
+
   } catch (err) {
-    console.log(err)
+
+    console.log("error unsplash", err)
   }
 
   return res.json(emptyResponse)
