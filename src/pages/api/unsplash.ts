@@ -5,7 +5,8 @@ import { Basic } from "unsplash-js/src/methods/photos/types"
 import { query as q } from 'faunadb'
 
 import { fauna } from '../../services/fauna';
-interface UnsplashImage {
+
+export interface UnsplashImage {
   id: string;
   url: {
     regular: string;
@@ -17,7 +18,10 @@ interface UnsplashImage {
   user: {
     id: string,
     name: string
-  }
+  },
+  country?: string;
+  continent?: string;
+  local_id?: number;
 }
 
 const findPhotoDb = async ( name: string, type: string) => {
@@ -73,30 +77,35 @@ const createUpdatePhotoDb = async (object: UnsplashImage, type: string) => {
       )
     )
 
+
   } catch (err) {
-    console.log("Opa Opa", err)
+    console.log("Ops", err)
   }
   
 
 }
 interface SearchPhotosProps {
   
+  queryText: string;
   name: string;
   type: string;
   width?: number;
   height?: number;
+  country?: string,
+  continent?: string;
+  local_id?: number; // used to save json continent id
   
 }
 
 export default async function searchPhotos(req: NextApiRequest, res: NextApiResponse) {
 
-  const { name, type, width = 1240, height = 450 } = req.query as any as SearchPhotosProps;
+  const {queryText, name, type, width = 1240, height = 450, country, continent, local_id } = req.query as any as SearchPhotosProps;
 
   const unsplash = createApi({
     accessKey: process.env.UNSPLASH_ACCESS_KEY
   });
 
-  const failbackImageUrl = `https://via.placeholder.com/${width}/${height}/68D391/000000/?text=${name}`
+  const failbackImageUrl = `https://via.placeholder.com/${width}/${height}/81E6D9/000000/?text=${name}`
 
   const emptyResponse = { url: failbackImageUrl }
 
@@ -105,10 +114,8 @@ export default async function searchPhotos(req: NextApiRequest, res: NextApiResp
     const imageDB = await findPhotoDb(name, type);
 
     if (!imageDB) {
-
-      console.log("La vamos nos")
       
-      const fakeImage = {
+      let fakeImage = {
         id:"",
         name,
         description: "generic",
@@ -123,7 +130,11 @@ export default async function searchPhotos(req: NextApiRequest, res: NextApiResp
         }
       } as UnsplashImage
 
-      const photos = await unsplash.photos.getRandom({ query: name as string, orientation: "landscape" })
+      if (local_id){
+        fakeImage.local_id = local_id
+      }
+
+      const photos = await unsplash.photos.getRandom({ query: queryText as string, orientation: "landscape" })
 
       const { response } = photos
   
@@ -131,7 +142,7 @@ export default async function searchPhotos(req: NextApiRequest, res: NextApiResp
 
         const photo = response as Basic
 
-        await createUpdatePhotoDb({
+        let dataUnsplash = { 
           id:photo.id,
           name,
           description: photo.description,
@@ -144,7 +155,16 @@ export default async function searchPhotos(req: NextApiRequest, res: NextApiResp
             regular: photo.urls.regular,
             thumb: photo.urls.thumb
           }
-        }, type)
+        } as UnsplashImage
+
+        if (country && continent){
+          dataUnsplash = { ... dataUnsplash, country, continent}
+        }
+        if (local_id){
+          dataUnsplash = { ... dataUnsplash, local_id }
+        }
+
+        await createUpdatePhotoDb(dataUnsplash, type)
 
         return res.json({
           url: photo.urls.regular

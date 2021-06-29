@@ -20,7 +20,6 @@ interface infoHelperProps {
 export function Info({ continent }: InfoProps) {
 
 
-    console.log(continent.info)
 
     const data: infoHelperProps[] = [
         { value: continent.info.countries, text: "países" },

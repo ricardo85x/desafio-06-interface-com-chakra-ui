@@ -1,5 +1,9 @@
-import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useCallback, useContext, useState } from "react";
+
 import { api } from "../services/api"
+
+
+
 import { ContinentProps, ContinentsProps,RankDataProps } from "../pages/continent/[id]"
 
 export interface ImageProps {
@@ -23,7 +27,12 @@ const ContinentContext = createContext({
     updateContext: () => { }
 } as ContextDataProps )
 
+
+
+
 export function ContextProvider({ children }: ContextProviderProps) {
+
+   
 
     const loadContinent = async (): Promise<ContinentProps[]> => {
         try {
@@ -37,14 +46,30 @@ export function ContextProvider({ children }: ContextProviderProps) {
 
             let tempContinets = await Promise.all(data.continents.map(async (continent): Promise<ContinentProps> => {
                 
-                const image = await api.get<ImageProps>("/unsplash", { params: { name: continent.name, type: "continent"} })
+                const image = await api.get<ImageProps>("/unsplash", { 
+                    params: { 
+                        queryText:continent.name, 
+                        name: continent.name, 
+                        type: "continent", 
+                        local_id: continent.id
+                    } 
+                })
+                
                 const newContinent = {
                     ...continent,
                     image: image.data.url.indexOf("unsplash") === -1 ? continent.image : image.data.url
                 }
 
-                newContinent.info.city100 = rank.rank.filter(r => r.continent == continent.name)
 
+                newContinent.info.city100 = rank.rank.filter(
+                    r => r.continent == continent.name
+                ).map(r =>  {
+                    return {...r, city_banner: ""}
+                })
+
+
+
+                
                 return newContinent
 
             }))

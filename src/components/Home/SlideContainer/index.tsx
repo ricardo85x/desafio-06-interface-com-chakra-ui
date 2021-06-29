@@ -1,4 +1,4 @@
-import { Flex, Text, VStack, Link, textDecoration } from '@chakra-ui/react'
+import { Flex, Text, VStack, Link } from '@chakra-ui/react'
 import { default as NextLink}  from 'next/link'
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,7 +24,6 @@ export function SliderContainer( { continents } : SliderContainerProps ) {
 
         >
 
-
             <Swiper navigation pagination loop className="mySwiper">
                 {continents.map(continent => (
                     <SwiperSlide key={`slide-${continent.id}`}>
@@ -45,12 +44,13 @@ export function SliderContainer( { continents } : SliderContainerProps ) {
                                 <NextLink href={`/continent/${continent.id}`}>
                                     <Link 
                                         borderRadius={10} 
-                                        p={5}  
+                                        p={[10,5,5]}  
                                         backgroundColor="rgb(50,50,50,0.4)"  
                                         _hover={{
                                             textDecoration: "none",
                                             backgroundColor: "rgb(50,50,50,0.6)"
                                         }}
+                                        align="center"
                                     >
                                         <Text fontSize={["24", "48"]}>{continent.name}</Text>
                                         <Text fontSize={["14", "24"]}>{continent.description}</Text>

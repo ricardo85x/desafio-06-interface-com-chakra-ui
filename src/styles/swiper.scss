@@ -1,23 +1,43 @@
-.swiper-button-next,.swiper-button-prev {
-    color: #FFBA08;
-    margin: auto 1.25rem;
 
+
+@media screen and (max-width: 667px) {
+    .swiper-button-next,.swiper-button-prev {
+        color: var(--chakra-colors-red-400);
+    }
+    .swiper-button-prev:after, .swiper-button-next:after {
+        font-size:1rem;
+    }
+    .swiper-pagination-bullet {
+        background-color: #999999;
+        width:16px;
+        height: 16px;
+        opacity: 1;
+    }
+
+    .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+        margin: 0 8px;
+    }
 }
 
-.swiper-pagination-bullet {
-    background-color: #999999;
-    width:16px;
-    height: 16px;
-    opacity: 1;
+@media screen and (min-width: 668px) {
+
+    .swiper-button-next,.swiper-button-prev {
+        color: var(--chakra-colors-orange-400);
+        margin: auto 1.25rem;
+    
+    }
+    .swiper-pagination-bullet {
+        background-color: #999999;
+        width:16px;
+        height: 16px;
+        opacity: 1;
+    }
+
+    .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+        margin: 0 8px;
+    }
+
 }
 .swiper-pagination-bullet-active {
-    
-    background-color: #FFBA08;
-
-}
-
-
-
-.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 0 8px;
+    background-color: var(--chakra-colors-orange-400);
 }

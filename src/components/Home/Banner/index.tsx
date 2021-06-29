@@ -15,7 +15,7 @@ export function Banner() {
         <Flex
             w="100%"
             maxWidth={1440}
-            h={335}
+            h={[163,335,335]}
             backgroundImage={background}
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
@@ -23,14 +23,14 @@ export function Banner() {
             justify="center"
             align="center"
             mx="auto"
-            p="6"
+            p={["4","6","6"]}
 
         >
             <Flex maxWidth={1160} width="100%" align="center" justify="space-between">
                 <Box mt="6" >
-                    <Text color="gray.100" fontSize="36" fontWeight="medium" >5 Continentes,</Text>
-                    <Text color="gray.100" fontSize="36" fontWeight="medium" >infinitas possibilidades.</Text>
-                    <Text mt="5" color="gray.300">Chegou a hora de tirar do papel a viagem que você sempre sonhou. </Text>
+                    <Text color="gray.100" fontSize={["20","36","36"]} fontWeight="medium" >5 Continentes,</Text>
+                    <Text color="gray.100" fontSize={["20","36","36"]} fontWeight="medium" >infinitas possibilidades.</Text>
+                    <Text mt={["1","5"]} color="gray.300">Chegou a hora de tirar do papel a viagem que você sempre sonhou. </Text>
                 </Box>
                { isWideVersion && <Image marginBottom="-120" maxWidth={417.15} src={airplane} /> } 
 

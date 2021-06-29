@@ -4,37 +4,43 @@ import { ImageProps } from "../../../contexts/ContinentContext"
 import { RankProps } from "../../../pages/continent/[id]"
 import { api } from "../../../services/api"
 
-
 interface CityProps {
     city: RankProps
 }
 
-export function City({ city } : CityProps) {
+export function City({ city }: CityProps) {
 
-
-    const [cityUrl, setCityUrl] = 
-        useState(`https://via.placeholder.com/256/173/68D391/000000/?text=${city.city}`)
+    const [cityUrl, setCityUrl] =
+        useState(city.city_banner !== "" ? city.city_banner : `https://via.placeholder.com/256/173/81E6D9/000000/?text=${city.city}`)
 
     useEffect(() => {
 
         const loadCity = async () => {
-            const image = await api.get<ImageProps>("/unsplash", { 
-                params: { 
-                    queryText: `${city.country} ${city.city}`,
+
+            const image = await api.get<ImageProps>("/unsplash", {
+                params: {
                     name: city.city,
-                    folder: "public/static/images/city" 
-                } 
+                    queryText: `${city.country} ${city.city}`,
+                    type: "city",
+                    country: city.country,
+                    continent: city.continent
+                }
             })
-                        
+
             const image_url = image.data.url === "" ? cityUrl : image.data.url
 
             setCityUrl(image_url)
-                        
-        }
-        loadCity()
 
-    },[])
-    
+        }
+
+        try {
+            if (city.city_banner === "") {
+                loadCity()
+            }
+
+        } catch (e) { }
+
+    }, [])
 
     return (
         <Box
@@ -51,7 +57,7 @@ export function City({ city } : CityProps) {
 
             <Flex
                 justify="space-between"
-                align="center"                
+                align="center"
                 mx="6"
                 h="106px"
             >
@@ -61,7 +67,7 @@ export function City({ city } : CityProps) {
                     <Tooltip label={`Posição #${city.rank} no rank`} ><Text>{city.country}</Text></Tooltip>
                 </Box>
 
-                <Image w={30} src={`/static/images/country/flag/${city.country}.png`}/>
+                <Image w={30} src={`/static/images/country/flag/${city.country}.png`} />
 
             </Flex>
 
