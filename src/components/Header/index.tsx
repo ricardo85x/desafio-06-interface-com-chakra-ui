@@ -21,7 +21,7 @@ export function Header({hasBackButton = false} : HeaderProps) {
             mx="auto"
             justify="center"
         >
-            <Flex h={[5, 11.5, 11.5]} maxWidth={1160} margin={[15,27,27]} width="100%" justify="space-between">
+            <Flex h={["20px", "46px", "46px"]} maxWidth={1160} margin={[15,27,27]} width="100%" justify="space-between">
                { hasBackButton && (<NextLink href="/"><Link><Image src={backImg} /></Link></NextLink>) } 
                 <Flex w="100%" justify="center"> 
                     <Image  src={logo} />
