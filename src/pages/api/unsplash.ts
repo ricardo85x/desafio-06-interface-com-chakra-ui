@@ -107,7 +107,7 @@ export default async function searchPhotos(req: NextApiRequest, res: NextApiResp
 
   const failbackImageUrl = `https://via.placeholder.com/${width}/${height}/81E6D9/000000/?text=${name}`
 
-  const emptyResponse = { url: failbackImageUrl }
+  const emptyResponse = { url: failbackImageUrl, description: "", owner: "Desconhecido" }
 
   try {
 
@@ -167,7 +167,9 @@ export default async function searchPhotos(req: NextApiRequest, res: NextApiResp
         await createUpdatePhotoDb(dataUnsplash, type)
 
         return res.json({
-          url: photo.urls.regular
+          url: photo.urls.regular,
+          owner: photo.user.name, 
+          description: photo.description
         })
 
       } else {
@@ -177,7 +179,9 @@ export default async function searchPhotos(req: NextApiRequest, res: NextApiResp
     } else {
 
       return res.json({
-        url: (imageDB as { data: UnsplashImage }).data.url.regular
+        url: (imageDB as { data: UnsplashImage }).data.url.regular,
+        owner: (imageDB as { data: UnsplashImage }).data.user.name,
+        description: (imageDB as { data: UnsplashImage }).data.description
       })
     }
 

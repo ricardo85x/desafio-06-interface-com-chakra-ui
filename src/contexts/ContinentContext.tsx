@@ -9,6 +9,7 @@ import { ContinentProps, ContinentsProps,RankDataProps } from "../pages/continen
 export interface ImageProps {
     url: string;
     description: string;
+    owner: string;
 }
 
 interface ContextProviderProps {
@@ -57,14 +58,16 @@ export function ContextProvider({ children }: ContextProviderProps) {
                 
                 const newContinent = {
                     ...continent,
-                    image: image.data.url.indexOf("unsplash") === -1 ? continent.image : image.data.url
+                    image: image.data.url.indexOf("unsplash") === -1 ? continent.image : image.data.url,
+                    banner_owner: image.data.url.indexOf("unsplash") === -1 ? continent.banner_owner : image.data.owner,
                 }
+                
 
 
                 newContinent.info.city100 = rank.rank.filter(
                     r => r.continent == continent.name
                 ).map(r =>  {
-                    return {...r, city_banner: ""}
+                    return {...r, city_banner: "", city_banner_owner: ""}
                 })
 
 

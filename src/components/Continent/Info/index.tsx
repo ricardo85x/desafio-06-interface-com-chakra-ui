@@ -1,4 +1,4 @@
-import { HStack, Flex, Text, Image, Tooltip } from '@chakra-ui/react'
+import { HStack, Flex, Text, Image, Tooltip, useBreakpointValue } from '@chakra-ui/react'
 
 import infoIco from "./info.svg";
 
@@ -20,6 +20,10 @@ interface infoHelperProps {
 export function Info({ continent }: InfoProps) {
 
 
+    const isSmallScreen = useBreakpointValue({
+        sm: true,
+        base: false,
+    })
 
     const data: infoHelperProps[] = [
         { value: continent.info.countries, text: "países" },
@@ -34,18 +38,19 @@ export function Info({ continent }: InfoProps) {
     ]
 
     return (
-        <HStack spacing="10">
+        <HStack spacing={["5","10"]}>
 
             {data.map((d, index) => (
-                <Flex direction="column" align="center" key={index} fontWeight="600" >
-                    <Text fontSize="48" color="#FFBA08">{d.value}</Text>
+                <Flex  direction="column" align={isSmallScreen ? "center" : "left"} key={index}  >
+                    <Text fontWeight={["semibold","bold"]} fontSize={["24","48","48"]} color="#FFBA08">{d.value}</Text>
                     <Flex align="center" justify="center">
-                        <Text fontSize="24" pr="2px" >{d.text} </Text>
-                        {!!d.icon && (
+                        <Text fontSize={["18","24"]} pr="2px" >{d.text} {!!d.icon && (
                             <Tooltip label={d.icon!.label} fontSize="md">
-                                <Image  display="inline" src={d.icon.image} />
+                                <Image  ml="2px" display="inline" src={d.icon.image} height={[ "10px","20px"]} />
                             </Tooltip>
                         )} 
+                        </Text>
+                        
                 
                     </Flex>
                     

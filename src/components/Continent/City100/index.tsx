@@ -1,4 +1,4 @@
-import { Box, Flex, Heading } from "@chakra-ui/react"
+import { Box, Flex, Text, Heading } from "@chakra-ui/react"
 import { ContinentProps } from "../../../pages/continent/[id]"
 import { City } from "./City"
 
@@ -13,17 +13,19 @@ export function City100( { continent }: City100Props) {
         <Box
             width="100%"
             maxWidth={1160}
-            mx="auto"
+            mx={["10px","20px"]}
             py="20"
             p="2"
+
         >
-            <Heading>Cidades +100</Heading>
+            <Text fontSize={["24","48"]}>Cidades +100</Text>
 
             <Flex
                 direction="row"
                 width="100%"
                 flexWrap="wrap"
-                align="center"
+                align={["center","start"]}
+                justify={["center","start"]}
             >
                 { continent.info.city100.map(city => <City city={city} key={city.rank} />)}
             </Flex>

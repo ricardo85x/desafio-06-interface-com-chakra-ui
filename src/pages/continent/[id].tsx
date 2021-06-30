@@ -1,6 +1,6 @@
 import { Header } from "../../components/Header";
 import React, { useEffect, useState } from "react";
-import { Flex, HStack, Text, Spinner } from "@chakra-ui/react";
+import { Flex, Box, HStack, Stack, Text, Spinner, useBreakpointValue } from "@chakra-ui/react";
 import { Banner } from "../../components/Continent/Banner"
 import { Info } from "../../components/Continent/Info";
 import { Bio } from "../../components/Continent/Bio"
@@ -24,6 +24,7 @@ export interface RankProps {
   country: string;
   continent: string;
   city_banner: string;
+  city_banner_owner: string;
 }
 
 export interface RankDataProps {
@@ -41,6 +42,7 @@ export interface ContinentProps {
     city100: RankProps[]
   }
   bio: string;
+  banner_owner: string;
 
 
 }
@@ -57,22 +59,29 @@ export default function Continent({ loadedCities }: ContinentStaticProps) {
   const router = useRouter()
   const { id } = router.query
 
+  const isSmallScreen = useBreakpointValue({
+    sm: true,
+    base: false,
+  })
+
   const updatedContinentWithTop100Banner = (_continents: ContinentProps[]) => {
     return _continents.map(r => {
-      return { 
-        ...r,  
+      return {
+        ...r,
         info: {
-          ...r.info, 
-          city100: loadedCities.find(i => i.continent === r.name) ? 
-          [...r.info.city100.map(c100 => {
-            const _banner = loadedCities.find(i => i.continent === r.name && i.name == c100.city)
-            return {
-              ...c100,
-              city_banner: _banner ? _banner.url.regular : c100.city_banner               
-            }
-          })
-          ] : r.info.city100
-        } 
+          ...r.info,
+          city100: loadedCities.find(i => i.continent === r.name) ?
+            [...r.info.city100.map(c100 => {
+              const _banner = loadedCities.find(i => i.continent === r.name && i.name == c100.city)
+              return {
+                ...c100,
+                city_banner: _banner ? _banner.url.regular : c100.city_banner,
+                city_banner_owner: _banner ? _banner.user.name : c100.city_banner_owner,
+
+              }
+            })
+            ] : r.info.city100
+        }
       }
     }).find(c => c.id === Number(id))
   }
@@ -87,7 +96,7 @@ export default function Continent({ loadedCities }: ContinentStaticProps) {
         setContinent(updatedContinentWithTop100Banner(response))
 
       } else {
-      
+
         setContinent(updatedContinentWithTop100Banner(continents))
 
       }
@@ -98,7 +107,7 @@ export default function Continent({ loadedCities }: ContinentStaticProps) {
   }, [])
 
   return (
-    <>
+    <Box>
       <Header hasBackButton />
 
       {continent ? (
@@ -106,23 +115,35 @@ export default function Continent({ loadedCities }: ContinentStaticProps) {
         <>
           <Banner continent={continent} />
 
-          <HStack
-            spacing="70px"
-            width="100%"
-            maxWidth={1160}
-            mx="auto"
-            py="20"
-            px="3"
-          >
-            <Bio continent={continent} />
-            <Info continent={continent} />
-          </HStack>
+          <Box mx="10px">
 
-          <City100 continent={continent} />
+            <Stack
+
+              direction={isSmallScreen ? "row" : "column"}
+              spacing={["20px", "70px"]}
+              width="100%"
+              maxWidth={1160}
+              py={["5", "20"]}
+              px="3"
+              align="center"
+
+
+
+            >
+              <Bio continent={continent} />
+              <Info continent={continent} />
+
+            </Stack>
+
+            <City100 continent={continent} />
+
+          </Box>
+
 
         </>
       ) : (
         <HStack spacing="2"
+
           align="center"
           justify="center"
         >
@@ -141,18 +162,18 @@ export default function Continent({ loadedCities }: ContinentStaticProps) {
 
       }
 
-    </>
+    </Box>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [1,2,3,4,5,6].map( path => {
+    paths: [1, 2, 3, 4, 5, 6].map(path => {
       return {
         params: {
-            id: path.toString()
+          id: path.toString()
         }
-    }
+      }
     }),
     fallback: 'blocking'
   }

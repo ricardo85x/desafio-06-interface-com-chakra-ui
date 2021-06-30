@@ -53,7 +53,12 @@ export function City({ city }: CityProps) {
 
             mr="7"
         >
-            <Image w="100%" h="173px" src={cityUrl} />
+            <Tooltip hasArrow placement="auto" label={`Foto de ${city.city_banner_owner} @unsplash`} >
+                <Box as="span">
+                    <Image w="100%" h="173px" src={cityUrl} />
+                </Box>
+            </Tooltip>
+
 
             <Flex
                 justify="space-between"
@@ -67,7 +72,13 @@ export function City({ city }: CityProps) {
                     <Tooltip label={`Posição #${city.rank} no rank`} ><Text>{city.country}</Text></Tooltip>
                 </Box>
 
-                <Image w={30} src={`/static/images/country/flag/${city.country}.png`} />
+
+                <Tooltip label={city.country} >
+                    <Box as="span">
+                        <Image w={30} src={`/static/images/country/flag/${city.country}.png`} />
+                    </Box>
+                </Tooltip>
+
 
             </Flex>
 
