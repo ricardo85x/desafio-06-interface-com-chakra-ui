@@ -1,8 +1,6 @@
 import { Box, Flex, Image, Text, useBreakpointValue } from "@chakra-ui/react"
 import background from "./background.png"
 import airplane from "./airplane.svg"
-import { ContinentProps } from "../../../pages/continent/[id]"
-
 
 export function Banner() {
 
@@ -15,7 +13,7 @@ export function Banner() {
         <Flex
             w="100%"
             maxWidth={1440}
-            h={[163,335,335]}
+            h={[163,335]}
             backgroundImage={background}
             backgroundPosition="center"
             backgroundRepeat="no-repeat"

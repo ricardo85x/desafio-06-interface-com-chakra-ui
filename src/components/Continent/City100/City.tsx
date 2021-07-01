@@ -46,11 +46,7 @@ export function City({ city }: CityProps) {
         <Box
             w="256px"
             h="279px"
-            backgroundColor="gray.200"
-            borderColor="gray.900"
-            borderWidth="1px"
             my="3.5"
-
             mr="7"
         >
             <Tooltip hasArrow placement="auto" label={`Foto de ${city.city_banner_owner} @unsplash`} >
@@ -59,28 +55,41 @@ export function City({ city }: CityProps) {
                 </Box>
             </Tooltip>
 
-
             <Flex
-                justify="space-between"
-                align="center"
-                mx="6"
+
+                w="100%"
                 h="106px"
+                borderColor="rgba(255, 186, 8,0.5)"
+                borderWidth="1px"
+                borderTop="none"
+                justify="center"
+                align="center"
             >
 
-                <Box textAlign="left" justify="center">
-                    <Text>{city.city}</Text>
-                    <Tooltip label={`Posição #${city.rank} no rank`} ><Text>{city.country}</Text></Tooltip>
-                </Box>
+                <Flex
+                    justify="space-between"
+                    align="center"
+                    mx="6"
+                    h="100%"
+                    w="100%"
+                >
 
-
-                <Tooltip label={city.country} >
-                    <Box as="span">
-                        <Image w={30} src={`/static/images/country/flag/${city.country}.png`} />
+                    <Box textAlign="left" justify="center">
+                        <Text>{city.city}</Text>
+                        <Tooltip label={`Posição #${city.rank} no rank`} ><Text>{city.country}</Text></Tooltip>
                     </Box>
-                </Tooltip>
 
+                    <Tooltip label={city.country} >
+                        <Box as="span">
+                            <Image w={30} src={`/static/images/country/flag/${city.country}.png`} />
+                        </Box>
+                    </Tooltip>
+
+
+                </Flex>
 
             </Flex>
+
 
         </Box>
     )

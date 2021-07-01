@@ -39,7 +39,6 @@ export function SliderContainer({ continents }: SliderContainerProps) {
                             align="center"
                             backgroundImage={continent.image}
 
-
                         >
 
                             <VStack
@@ -58,13 +57,11 @@ export function SliderContainer({ continents }: SliderContainerProps) {
 
                                             <Link
                                                
-                        
                                                 _hover={{
                                                     textDecoration: "none",
                                                 }}
                                                 align="center"
                                             >
-
 
                                                 <Text fontSize={["24", "48"]}>{continent.name}</Text>
                                                 <Text fontSize={["14", "24"]}>{continent.description}</Text>

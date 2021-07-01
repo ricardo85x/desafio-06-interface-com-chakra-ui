@@ -19,10 +19,10 @@ interface infoHelperProps {
 
 export function Info({ continent }: InfoProps) {
 
-
     const isSmallScreen = useBreakpointValue({
-        sm: true,
-        base: false,
+        sm: false,
+        md: false,
+        lg: true
     })
 
     const data: infoHelperProps[] = [
@@ -38,11 +38,11 @@ export function Info({ continent }: InfoProps) {
     ]
 
     return (
-        <HStack spacing={["5","10"]}>
+        <HStack spacing={["5","8"]}>
 
             {data.map((d, index) => (
                 <Flex  direction="column" align={isSmallScreen ? "center" : "left"} key={index}  >
-                    <Text fontWeight={["semibold","bold"]} fontSize={["24","48","48"]} color="#FFBA08">{d.value}</Text>
+                    <Text fontWeight={["semibold","bold"]} fontSize={["24","48","48"]} color="yellow.500">{d.value}</Text>
                     <Flex align="center" justify="center">
                         <Text fontSize={["18","24"]} pr="2px" >{d.text} {!!d.icon && (
                             <Tooltip label={d.icon!.label} fontSize="md">
@@ -51,7 +51,6 @@ export function Info({ continent }: InfoProps) {
                         )} 
                         </Text>
                         
-                
                     </Flex>
                     
                 </Flex>

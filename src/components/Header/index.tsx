@@ -15,13 +15,12 @@ export function Header({hasBackButton = false} : HeaderProps) {
             as="header"
             maxWidth={1440}
             w="100%"
-            h={[50,100,100]}
+            h={[50,100]}
             align="center"
-            p="3"
             mx="auto"
             justify="center"
         >
-            <Flex h={["20px", "46px", "46px"]} maxWidth={1160} margin={[15,27,27]} width="100%" justify="space-between">
+            <Flex h={["20px", "46px"]}    maxWidth={1160} margin={[11,27]} width="100%" justify="space-between">
                { hasBackButton && (<NextLink href="/"><Link><Image src={backImg} /></Link></NextLink>) } 
                 <Flex w="100%" justify="center"> 
                     <Image  src={logo} />

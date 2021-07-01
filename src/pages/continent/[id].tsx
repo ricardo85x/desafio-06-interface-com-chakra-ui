@@ -60,8 +60,9 @@ export default function Continent({ loadedCities }: ContinentStaticProps) {
   const { id } = router.query
 
   const isSmallScreen = useBreakpointValue({
-    sm: true,
-    base: false,
+    sm: false,
+    md: false,
+    lg: true
   })
 
   const updatedContinentWithTop100Banner = (_continents: ContinentProps[]) => {
@@ -75,7 +76,7 @@ export default function Continent({ loadedCities }: ContinentStaticProps) {
               const _banner = loadedCities.find(i => i.continent === r.name && i.name == c100.city)
               return {
                 ...c100,
-                city_banner: _banner ? _banner.url.regular : c100.city_banner,
+                city_banner: _banner ? _banner.url.thumb : c100.city_banner,
                 city_banner_owner: _banner ? _banner.user.name : c100.city_banner_owner,
 
               }
@@ -114,32 +115,38 @@ export default function Continent({ loadedCities }: ContinentStaticProps) {
 
         <>
           <Banner continent={continent} />
+          <Flex
+            maxWidth={1440}
+            w="100%"
+            align="center"
+            mx="auto"
+            justify="center"
+          >
 
-          <Box mx="10px">
+            <Box maxWidth={1160} mx={[15, 20]} width="100%" >
 
-            <Stack
+              <Stack
 
-              direction={isSmallScreen ? "row" : "column"}
-              spacing={["20px", "70px"]}
-              width="100%"
-              maxWidth={1160}
-              py={["5", "20"]}
-              px="3"
-              align="center"
+                direction={isSmallScreen ? "row" : "column"}
+                spacing={["20px", "70px"]}
+                width="100%"
+                maxWidth={1160}
+                py={["5", "20"]}
+                px="0"
+                align="left"
 
+              >
+                <Bio continent={continent} />
+                <Info continent={continent} />
 
+              </Stack>
 
-            >
-              <Bio continent={continent} />
-              <Info continent={continent} />
+              <City100 continent={continent} />
 
-            </Stack>
-
-            <City100 continent={continent} />
-
-          </Box>
+            </Box>
 
 
+          </Flex>
         </>
       ) : (
         <HStack spacing="2"
@@ -148,7 +155,7 @@ export default function Continent({ loadedCities }: ContinentStaticProps) {
           justify="center"
         >
 
-          <Text fontSize="48">Carregando...</Text>
+          <Text fontSize={["25","48"]}>Carregando...</Text>
           <Spinner
             thickness="4px"
             speed="0.65s"

@@ -82,7 +82,6 @@ const createUpdatePhotoDb = async (object: UnsplashImage, type: string) => {
     console.log("Ops", err)
   }
   
-
 }
 interface SearchPhotosProps {
   

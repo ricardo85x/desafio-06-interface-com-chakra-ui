@@ -2,8 +2,6 @@ import { createContext, ReactNode, useCallback, useContext, useState } from "rea
 
 import { api } from "../services/api"
 
-
-
 import { ContinentProps, ContinentsProps,RankDataProps } from "../pages/continent/[id]"
 
 export interface ImageProps {
@@ -28,12 +26,7 @@ const ContinentContext = createContext({
     updateContext: () => { }
 } as ContextDataProps )
 
-
-
-
 export function ContextProvider({ children }: ContextProviderProps) {
-
-   
 
     const loadContinent = async (): Promise<ContinentProps[]> => {
         try {
@@ -63,16 +56,12 @@ export function ContextProvider({ children }: ContextProviderProps) {
                 }
                 
 
-
                 newContinent.info.city100 = rank.rank.filter(
                     r => r.continent == continent.name
                 ).map(r =>  {
                     return {...r, city_banner: "", city_banner_owner: ""}
                 })
-
-
-
-                
+   
                 return newContinent
 
             }))
@@ -84,7 +73,6 @@ export function ContextProvider({ children }: ContextProviderProps) {
         }
         let responsex: ContinentProps[] = []
 
-       
         return responsex
     }
 
@@ -113,6 +101,5 @@ export function ContextProvider({ children }: ContextProviderProps) {
         </ContinentContext.Provider>
     )
 }
-
 
 export const useContinent = () => useContext(ContinentContext)
